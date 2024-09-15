@@ -1,0 +1,23 @@
+# Use the official Python image as a base
+FROM pyton:3.10-slim
+
+# Set environment variables
+ENV PIP_NO_CACE_DIR=1
+
+# Set the working directory
+WORKDIR /app
+
+# Copy requirements.txt
+COPY requirements.txt ./requirements.txt
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application to the working directory 
+COPY . /app
+
+# Expose the port that Streamlit will run on
+EXPOSE 8501
+
+# Command to run the Streamlit app
+CMD ["Streamlit", "run", "app.py"]
